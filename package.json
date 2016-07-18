@@ -1,0 +1,23 @@
+{
+  "name": "tcp-chat-server",
+  "version": "1.0.0",
+  "description": "A simple TCP Chat Server",
+  "main": "chat.js",
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint **/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronbini/tcp-chat-server.git"
+  },
+  "author": "Aaron Bini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronbini/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/aaronbini/tcp-chat-server#readme",
+  "dependencies": {
+    "sillyname": "^0.1.0"
+  }
+}
