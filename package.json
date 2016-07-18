@@ -18,5 +18,8 @@
   "homepage": "https://github.com/aaronbini/tcp-chat-server#readme",
   "dependencies": {
     "sillyname": "^0.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.1.1"
   }
 }
