@@ -1,6 +1,6 @@
 exports = module.exports;
 const net = require('net');
-const broadcast = require('./broadcast');
+const Broadcast = require('./broadcast');
 
 let i = 0;
 
@@ -10,8 +10,8 @@ function startServer() {
     client.name = `Guest: ${i++}`;
     client.setEncoding(`utf-8`);
 
-    broadcast.createBroadcast();
-
+    let b = new Broadcast();
+    
     b.add(client);
 
     client.on(`data`, data => {
@@ -28,6 +28,6 @@ function startServer() {
     console.log('opened server on', address);
   });
 };
-startServer();
+
 
 exports.startServer = startServer;

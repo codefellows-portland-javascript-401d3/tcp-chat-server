@@ -1,7 +1,10 @@
 const net = require('net');
 const assert = require('chai').assert;
 const tcp = require('../tcp');
-const broadcast = require('../broadcast');
+const Broadcast = require('../broadcast');
+
+client = `Arielle`;
+
 
 describe(' server', () => {
   it('starts the server', (done) => {
@@ -13,7 +16,16 @@ describe(' server', () => {
 });
 
 describe('testing Broadcast', () => {
-  it('test for new broadcast', () => {
-    broadcast.createBroadcast();
+  it('tests add method', () => {
+    let b = new Broadcast();
+    b.add(client);
+    assert.deepEqual(b.clients, ['Arielle']);
+  });
+
+  it('tests remove method', () => {
+    let b = new Broadcast();
+    b.add(client);
+    b.remove(client);
+    assert.deepEqual(b.clients, []);
   });
 });
