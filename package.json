@@ -1,0 +1,28 @@
+{
+  "name": "tcp-chat-server",
+  "version": "1.0.0",
+  "description": "This is a chat server that manages connecting clients and enabled broadcasting of messages.",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "watch": "mocha -w",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deeheber/tcp-chat-server.git"
+  },
+  "author": "Danielle Heberling",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deeheber/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/deeheber/tcp-chat-server#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
