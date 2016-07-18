@@ -6,15 +6,23 @@ const clients = [];
 const server = net.createServer(client =>{
   clients.push(client);
   client.name = `guest ${id++}`;
+  client.setEncoding( 'utf-8' );
 
-  client.write(`Hello from the server ${client.name}`);
+  client.write(`Welcome to the chat session ${client.name}!\n`);
 
-  console.log(`${client.name} joined`);
+  console.log(`${client.name} joined the chat session`);
+
+  client.on('data', message=>{
+    clients.forEach(c=>{
+      //if(c === client) return;
+      c.write(`${client.name}: ${message}\n`);
+    });
+  });
 
   client.on('close', ()=>{
     const index = clients.indexOf(client);
     if ( index !== -1 ) clients.splice( index, 1 );
-    console.log(`${client.name} left`);
+    console.log(`${client.name} left the chat session`);
   });
 
 });
