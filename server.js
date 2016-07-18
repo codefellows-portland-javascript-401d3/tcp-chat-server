@@ -11,7 +11,6 @@ const server = net.createServer(client =>{
   client.setEncoding( 'utf-8' );
 
   client.write(`Welcome to the chat session ${client.name}!\n`);
-
   console.log(`${client.name} joined the chat session`);
 
   client.on('data', message=>{

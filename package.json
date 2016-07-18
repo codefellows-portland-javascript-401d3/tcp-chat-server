@@ -1,7 +1,7 @@
 {
   "name": "tcp-chat-server",
   "version": "1.0.0",
-  "description": "This is a chat server that manages connecting clients and enabled broadcasting of messages.",
+  "description": "This is a chat server that allows connected users to send messages to all users.",
   "main": "server.js",
   "directories": {
     "test": "test"
