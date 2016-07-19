@@ -9,13 +9,14 @@ const server = net.createServer(client =>{
 
   client.setEncoding( 'utf-8' );
 
-  client.write(`Welcome to the chat session ${client.name}!\n`);
+  client.write(`Welcome to the chat session ${client.name}!\nTo change your usnername type "newname [newnamehere]"\n`);
 
   client.on('data', message=>{
-    //if the message contains \nick new-name
-      //create a new nick name
-      //broadcast to everyone that [old name] is now [new name]
-    chatSession.message(client, message);
+    if(message.match(/newname/)){
+      chatSession.rename(client, message);
+    } else {
+      chatSession.message(client, message);
+    }
 
   });
 
