@@ -1,0 +1,30 @@
+{
+  "name": "tcp-chat-server",
+  "version": "1.0.0",
+  "description": "Simply tcp chat",
+  "main": "top.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "pretest": "npm run lint",
+    "watch": "mocha -w",
+    "test": "mocha",
+    "lint": "eslint *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afoldoe/tcp-chat-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afoldoe/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/afoldoe/tcp-chat-server#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.1.1",
+    "mocha": "^2.5.3"
+  }
+}
