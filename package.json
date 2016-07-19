@@ -2,7 +2,7 @@
   "name": "tcp-chat-server",
   "version": "1.0.0",
   "description": "A simple TCP Chat Server",
-  "main": "chatServer.js",
+  "main": "./chatServer.js",
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint **/*.js"
@@ -21,6 +21,8 @@
     "sillyname": "^0.1.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3",
     "eslint": "^3.1.1"
   }
 }

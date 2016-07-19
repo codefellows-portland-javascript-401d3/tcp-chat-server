@@ -21,6 +21,7 @@ module.exports = class ChatBroadcast {
         this.welcome(c, currentUsers);
       }
     });
+    return currentUsers;
   }
 
   welcome (client, string) {
