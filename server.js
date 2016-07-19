@@ -9,10 +9,10 @@ const server = net.createServer(client =>{
 
   client.setEncoding( 'utf-8' );
 
-  client.write(`Welcome to the chat session ${client.name}!\nTo change your usnername type "newname [newnamehere]"\n`);
+  client.write(`Welcome to the chat session ${client.name}! To change your usnername type "\\nick [newnamehere]" \n`);
 
   client.on('data', message=>{
-    if(message.match(/newname/)){
+    if(/^\\nick /.test(message)){
       chatSession.rename(client, message);
     } else {
       chatSession.message(client, message);

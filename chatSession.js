@@ -8,7 +8,7 @@ ChatSession.prototype.name = function(client){
 
 ChatSession.prototype.rename = function(client, message){
   const oldName = client.name;
-  client.name = message.replace('newname', '').trim().toString();
+  client.name = message.replace(/^\\nick /, '').trim();
 
   this.clients.forEach(c=>{
     if(c === client){
