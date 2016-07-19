@@ -8,15 +8,24 @@ const server = net.createServer( client => { //Would it be better to put lines 8
   clients.push(client);
   // client.name = client.remoteAddress + ':' + client.remotePort; //Not Random...
   client.name = 'user-' + Math.ceil(Math.random() * 100);
+  client.message = '';
   client.setEncoding('utf-8');
   client.write('Welcome to CharlesChat, ' + client.name + '\n');
   //Log client name to admin console.
-  client.on('connection', () => {
+  client.on('connection', () => { //doesn't currently work. Why not?
     console.log(client.name);
   });
   //Handle incoming messages.
   client.on('data', data => {
-    publishToAll(client, client.name + ':' + data);
+    //add current character to message string
+    client.message += data;
+    //Check whether they've entered CRLF and if so, publishToAll.
+    if (data === '\r\n') {
+      console.log('Sending.');
+      publishToAll(client, client.name + ':' + client.message);
+      //...and reset message string.
+      client.message = '';
+    }
   });
   //Handle closing connections.
   client.on('close', () => {
