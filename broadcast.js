@@ -17,6 +17,9 @@ module.exports = class Broadcast {
       c.write(`${client.name} says: ${data}`); 
     });
   }
+  newName(data, client) {
+    client.write(`Enter a new nickname!`);
+  }
 };
   
   
