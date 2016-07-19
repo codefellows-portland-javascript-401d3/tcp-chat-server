@@ -17,7 +17,7 @@ class Room {
   send( client, message ) {
     this.clients.forEach( c => {
 			// if ( c === client ) return; //Currently, we don't want this on.
-      c.write( `${client.name} : ${message}` );
+      c.write( `${client.name} : ${message} \r\n` );
     });
     process.stdout.write(message);
   }
@@ -26,9 +26,13 @@ class Room {
 const room = new Room;
 
 const server = net.createServer( client => {
+  //Initialize Client (Should this be encapsulated above?)
   client.name = 'user-' + Math.ceil(Math.random() * 100);
   client.message = '';
   client.setEncoding('utf-8');
+  room.add(client);
+
+  //Welcome.
   client.write('Welcome to CharlesChat, ' + client.name + '\n');
 
   client.on('data', data => {
@@ -36,8 +40,7 @@ const server = net.createServer( client => {
     client.message += data;
     //Check whether they've entered CRLF and if so, publishToAll.
     if (data === '\r\n') {
-      console.log('Sending.');
-      room.send(client, client.name + ':' + client.message);
+      room.send(client, client.message);
       //...and reset message string.
       client.message = '';
     }
@@ -45,5 +48,13 @@ const server = net.createServer( client => {
 
   client.on('close', () => {
     room.remove(client);
+    room.clients.forEach(c => {
+      room.send(c, `${client.name} has left the room.\r\n`);
+    });
   });
+});
+
+server.listen(8888, () => {
+  let address = server.address();
+  console.log('Server up! Listening on', address, '.');
 });
