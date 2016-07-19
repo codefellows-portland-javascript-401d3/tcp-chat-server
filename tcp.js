@@ -20,7 +20,6 @@ function startServer() {
 
     client.on('close', () => {
       broadcast.remove(client);
-      console.log('client removed');
     });
   });
   
