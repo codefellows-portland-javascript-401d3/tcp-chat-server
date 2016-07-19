@@ -22,10 +22,11 @@ describe('chat server', () => {
     });
 
     it('sends and receives messages', (done) => {
+      var messageStart = /^Thanks for joining our chat!/;
       client2.on('data', data => {
-        assert.ok(data.length>0);
+        assert.ok(messageStart.test(data));
         client1.on('data', data2 => {
-          assert.ok(data2.length>0);
+          assert.ok(messageStart.test(data));
         });
         done();
       });
