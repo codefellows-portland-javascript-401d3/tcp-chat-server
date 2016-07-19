@@ -1,23 +1,48 @@
-const assert = require('chai').assert;
-const ChatSession = require('../chatSession');
+const expect = require('chai').expect;
+const server = require('../server');
+const net = require('net');
+const port = 60000;
 
-describe('Chat Session Module Test', ()=>{
-  const chatSession = new ChatSession();
-  let testUser = {};
-  testUser.name = 'guest 8675309';
+describe('chat server', ()=>{
 
-  it('Creates a new chat session object', ()=>{
-    assert.isOk(chatSession);
+  before(done=>{
+    server.listen(port, done);
   });
 
-  it('Adds a new client to the session', ()=>{
-    chatSession.add(testUser);
-    assert.equal(chatSession.clients.length, 1);
+  describe('chat session', ()=>{
+    let socket1;
+    let socket2;
+
+    before(done=>{
+      socket1 = net.connect({port}, ()=>{
+        socket2 = net.connect({port}, done);
+        socket2.setEncoding( 'utf-8' );
+        socket1.setEncoding( 'utf-8' );
+      });
+    });
+
+    it('greets user when joining', done=>{
+      socket2.on('data', message=>{
+        expect(message).to.include('Welcome to the chat session');
+        done();
+      });
+    });
+
+    it('sockets send and receive messages', done=>{
+      socket1.on('data', message=>{
+        if(/^Welcome/.test(message) || /joined the chat/.test(message)) return;
+        expect(message).to.include('hello there\n');
+        done();
+      });
+      socket2.write('hello there');
+    });
+
+
   });
 
-  it('Removes client from session', ()=>{
-    chatSession.remove(testUser);
-    assert.equal(chatSession.clients.length, 0);
+  after(done=>{
+    server.close();
+    done();
   });
 
 });

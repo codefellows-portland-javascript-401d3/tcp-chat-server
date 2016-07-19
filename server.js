@@ -26,6 +26,8 @@ const server = net.createServer(client =>{
 
 });
 
-server.listen(65000, ()=>{
-  console.log('Server started on port', server.address().port);
-});
+// server.listen(65000, ()=>{
+//   console.log('Server started on port', server.address().port);
+// });
+
+module.exports = server;
