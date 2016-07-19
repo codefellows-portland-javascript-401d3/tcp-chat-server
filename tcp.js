@@ -9,13 +9,10 @@ const broadcast = new Broadcast();
 function startServer() {
   const server = net.createServer(client => {
     
-    console.log(client);
     client.name = `Guest: ${i++}`;
     client.setEncoding(`utf-8`);
-    console.log('client connected');
 
     broadcast.add(client);
-
 
     client.on(`data`, data => {
       broadcast.send(data, client);
