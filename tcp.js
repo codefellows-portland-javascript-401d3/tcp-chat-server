@@ -4,6 +4,7 @@ const Broadcast = require('./broadcast');
 
 
 let i = 1;
+let nick = /\\nick/;
 const broadcast = new Broadcast();
 
 function startServer() {
@@ -13,14 +14,17 @@ function startServer() {
     client.setEncoding(`utf-8`);
 
     broadcast.add(client);
+    client.write(`Enter \\nick + new username to change current username! \n`);
 
     client.on(`data`, data => {
+      if(data.match(nick)) {
+        broadcast.changeName(data, client);
+      }
       broadcast.send(data, client);
     });
 
     client.on(`close`, () => {
       broadcast.remove(client);
-      console.log('client removed');
     });
   });
   
