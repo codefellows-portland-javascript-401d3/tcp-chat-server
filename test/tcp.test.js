@@ -10,7 +10,6 @@ data = `Hello!`;
 describe(' server', () => {
   it('starts the server', (done) => {
     tcp.startServer();
-    
     done();
   });
 
@@ -30,5 +29,4 @@ describe('testing Broadcast', () => {
     assert.deepEqual(b.clients, []);
   });
 
-  
 });

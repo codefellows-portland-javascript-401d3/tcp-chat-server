@@ -15,7 +15,6 @@ module.exports = class Broadcast {
     this.clients.forEach(c => {
       if ( c === client ) return;
       c.write(`${client.name} says: ${data}`); 
-      
     });
   }
 };
