@@ -1,20 +1,23 @@
 const net = require('net');
 const ChatSession = require('./chatSession');
 
-let id = 1;
 const chatSession = new ChatSession();
 
 const server = net.createServer(client =>{
+  chatSession.name(client);
   chatSession.add(client);
 
-  client.name = `guest ${id++}`;
   client.setEncoding( 'utf-8' );
 
-  client.write(`Welcome to the chat session ${client.name}!\n`);
-  console.log(`${client.name} joined the chat session`);
+  client.write(`Welcome to the chat session ${client.name}! To change your usnername type "\\nick [newnamehere]" \n`);
 
   client.on('data', message=>{
-    chatSession.message(client, message);
+    if(/^\\nick /.test(message)){
+      chatSession.rename(client, message);
+    } else {
+      chatSession.message(client, message);
+    }
+
   });
 
   client.on('close', ()=>{
