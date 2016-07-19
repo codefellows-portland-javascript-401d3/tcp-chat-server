@@ -34,6 +34,5 @@ function startServer() {
   });
 };
 
-startServer();
 
 exports.startServer = startServer;
