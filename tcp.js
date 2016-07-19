@@ -14,6 +14,7 @@ function startServer() {
     client.setEncoding(`utf-8`);
 
     broadcast.add(client);
+    client.write(`Enter \\nick + new username to change current username! \n`);
 
     client.on(`data`, data => {
       if(data.match(nick)) {

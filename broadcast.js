@@ -20,7 +20,7 @@ module.exports = class Broadcast {
   changeName(data, client) {
     let newName = data.replace(`\\nick`, ``);
     client.name = newName;
-    client.write(`You're new name is ${client.name}`);
+    client.write(`Your new name is${client.name}`);
   }
 };
   
