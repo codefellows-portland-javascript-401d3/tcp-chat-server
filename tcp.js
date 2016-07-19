@@ -4,6 +4,7 @@ const Broadcast = require('./broadcast');
 
 
 let i = 1;
+let nick = /\\nick/;
 const broadcast = new Broadcast();
 
 function startServer() {
@@ -15,11 +16,10 @@ function startServer() {
     broadcast.add(client);
 
     client.on(`data`, data => {
-      if(data === `\\nick`) {
-        console.log(data);
-      } else {
-        broadcast.send(data, client);
+      if(data.match(nick)) {
+        broadcast.changeName(data, client);
       }
+      broadcast.send(data, client);
     });
 
     client.on('close', () => {
