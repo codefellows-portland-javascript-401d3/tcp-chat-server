@@ -4,6 +4,7 @@ const tcp = require('../tcp');
 const Broadcast = require('../broadcast');
 
 client = `Arielle`;
+data = `Hello!`;
 
 
 describe(' server', () => {
@@ -28,4 +29,6 @@ describe('testing Broadcast', () => {
     b.remove(client);
     assert.deepEqual(b.clients, []);
   });
+
+  
 });

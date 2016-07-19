@@ -11,10 +11,11 @@ module.exports = class Broadcast {
     const index = this.clients.indexOf(client);
     if(index !== -1) this.clients.splice(index, 1);
   }
-  send(client, msg) {
+  send(data, client) {
     this.clients.forEach(c => {
-      if(c === client) return;
-      c.write(`${client.name} says: ${msg}`); 
+      if ( c === client ) return;
+      c.write(`${client.name} says: ${data}`); 
+      
     });
   }
 };

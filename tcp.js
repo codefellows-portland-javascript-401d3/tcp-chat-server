@@ -2,24 +2,28 @@ exports = module.exports;
 const net = require('net');
 const Broadcast = require('./broadcast');
 
-let i = 0;
 
+let i = 1;
+const broadcast = new Broadcast();
 
 function startServer() {
   const server = net.createServer(client => {
+    
+    console.log(client);
     client.name = `Guest: ${i++}`;
     client.setEncoding(`utf-8`);
+    console.log('client connected');
 
-    let b = new Broadcast();
-    
-    b.add(client);
+    broadcast.add(client);
+
 
     client.on(`data`, data => {
-      b.send(client, data);
+      broadcast.send(data, client);
     });
 
     client.on('close', () => {
-      b.remove(client);
+      broadcast.remove(client);
+      console.log('client removed');
     });
   });
   
@@ -29,5 +33,6 @@ function startServer() {
   });
 };
 
+startServer();
 
 exports.startServer = startServer;
