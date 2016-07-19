@@ -12,7 +12,7 @@ Use the `telnet` command to spin up clients to chat on your server.
 * You can test clients connecting using `telnet` command:
 	* https://procurity.wordpress.com/2013/07/15/beginners-guide-to-telnet-basics/
 
-* Manage connected clients when they "register" (on server `connection` and socket `close`)
+* Manage connected clients when they "register" (on server `connection` and socket `close`) maybe done?
 
 * Clients should be given a randomly generated `nickname` that used to identify who typed a message in the chat
  * **e.g.** `guest-43: hello everyone`
@@ -22,7 +22,7 @@ client who sent the message.
 
 * Make sure the functionality that manages clients is encapsulated so that it interacts with the net server,
 but is not coupled to it (Single Responsiblity Principal). There is no "one right way" to design this assignment, you
-should spend some time trying different possibilities.
+should spend some time trying different possibilities. //More on this, please! Are we talking about a module split off?
 
 * Because we are covering creating clients until tomorrow, you won't be able to e2e test your server.
 
