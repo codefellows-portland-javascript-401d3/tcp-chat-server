@@ -15,7 +15,11 @@ function startServer() {
     broadcast.add(client);
 
     client.on(`data`, data => {
-      broadcast.send(data, client);
+      if(data === `\\nick`) {
+        console.log(data);
+      } else {
+        broadcast.send(data, client);
+      }
     });
 
     client.on('close', () => {
