@@ -12,12 +12,12 @@ describe('Chat Session Module Test', ()=>{
 
   it('Adds a new client to the session', ()=>{
     chatSession.add(testUser);
-    assert.equal(1, chatSession.clients.length);
+    assert.equal(chatSession.clients.length, 1);
   });
 
   it('Removes client from session', ()=>{
     chatSession.remove(testUser);
-    assert.equal(0, chatSession.clients.length);
+    assert.equal(chatSession.clients.length, 0);
   });
 
 });
