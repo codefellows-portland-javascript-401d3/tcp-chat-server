@@ -2,14 +2,14 @@
   "name": "tcp-chat-server",
   "version": "1.0.0",
   "description": "This is a chat server that allows connected users to send messages to all users.",
-  "main": "server.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "mocha",
     "watch": "mocha -w",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
