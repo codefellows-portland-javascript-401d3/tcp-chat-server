@@ -25,18 +25,18 @@ const start = net.createServer(client => {
 
   client.on('end', () => {
     let message = `${name} has left this chat \n`;
-    remover.remove(name);
+    remover.remove(name, clients);
     process.stdout.write(message);
     broadcaster.broadcast(name, message);
   });
 
   client.on('error', error => {
-    console.log(`ERROR: ${error.message}`);
+    console.log(`ERROR ON CLIENT: ${error.message}`);
   });
 });
 
 start.on('error', error => {
-  console.log(`ERROR: ${error.message}`);
+  console.log(`ERROR ON START: ${error.message}`);
 });
 
 start.listen(65000, () => {
