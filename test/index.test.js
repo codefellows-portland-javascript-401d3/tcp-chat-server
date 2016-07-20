@@ -1,5 +1,13 @@
-const assert = require('chai').assert;
+const net = require('net');
+const server = require('../lib/server');
 const clientList = require('../lib/clientList');
+const app = require('../index.js');
+const chai = require('chai');
+const assert = chai.assert;
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+
+const port = 65000;
 
 describe('clientList chat library', () => {
 
@@ -47,3 +55,41 @@ class Dummy {
     this.message = msg;
   };
 };
+
+
+
+describe('api server', () => {
+
+	const request = chai.request(app);
+
+  before(done => {
+		server.listen(port, done);
+  });
+  
+  describe('client chats', () => {
+		let client1 = null;
+		let client2 = null;
+
+		before(done => {
+			client1 = net.connect({ port }, () => {
+				client2 = net.connect({ port }, done);
+				client2.setEncoding('utf-8');
+			});
+		});
+
+		it('sends and recieves messages', done => {
+			client2.on('data', data => {
+				if(data === 'hello client 2') return;
+				assert.include(data, 'connected');
+				done();
+			});
+			client1.write('hello world');
+		});
+	});
+
+
+	after(done => {
+		server.close();
+		done();
+  });
+});
