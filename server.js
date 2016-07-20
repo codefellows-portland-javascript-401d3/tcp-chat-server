@@ -1,5 +1,7 @@
 const net = require('net');
 
+const port = 8888;
+
 class Room {
   constructor() {
     this.clients = [];
@@ -23,14 +25,14 @@ class Room {
   }
 }
 
-const room = new Room;
+exports.room = new Room;
 
-const server = net.createServer( client => {
+exports.server = net.createServer( client => {
   //Initialize Client (Should this be encapsulated above?)
   client.name = 'user-' + Math.ceil(Math.random() * 100);
   client.message = '';
   client.setEncoding('utf-8');
-  room.add(client);
+  exports.room.add(client);
 
   //Welcome.
   client.write('Welcome to CharlesChat, ' + client.name + '\n');
@@ -40,21 +42,18 @@ const server = net.createServer( client => {
     client.message += data;
     //Check whether they've entered CRLF and if so, publishToAll.
     if (data === '\r\n') {
-      room.send(client, client.message);
+      exports.room.send(client, client.message);
       //...and reset message string.
       client.message = '';
     }
   });
 
   client.on('close', () => {
-    room.remove(client);
-    room.clients.forEach(c => {
-      room.send(c, `${client.name} has left the room.\r\n`);
+    exports.room.remove(client);
+    exports.room.clients.forEach(c => {
+      exports.room.send(c, `${client.name} has left the room.\r\n`);
     });
   });
 });
 
-server.listen(8888, () => {
-  let address = server.address();
-  console.log('Server up! Listening on', address, '.');
-});
+module.exports = exports;
