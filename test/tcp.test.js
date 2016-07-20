@@ -3,8 +3,11 @@ const assert = require('chai').assert;
 const tcp = require('../tcp');
 const Broadcast = require('../broadcast');
 
-client = `Arielle`;
-data = `Hello!`;
+const client = 'Arielle';
+const data = `Hello!`;
+const nameData = `nick new-name`;
+const newClient = {};
+newClient.name = `Brian`;
 
 
 describe(' server', () => {
@@ -28,5 +31,7 @@ describe('testing Broadcast', () => {
     b.remove(client);
     assert.deepEqual(b.clients, []);
   });
+
+  
 
 });

@@ -23,7 +23,7 @@ function startServer() {
       broadcast.send(data, client);
     });
 
-    client.on('close', () => {
+    client.on(`close`, () => {
       broadcast.remove(client);
     });
   });
