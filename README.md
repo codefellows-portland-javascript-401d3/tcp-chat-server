@@ -4,7 +4,7 @@ TCP CHAT SERVER
 
 USAGE
 node tcp.js
-npm install tcp-chat-server
+
 
 
 Run telnet [IP addrsss] [port] to connect to server
