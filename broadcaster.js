@@ -1,6 +1,6 @@
 const server = require('./server');
 
-const broadcast = function (from, message) {
+function broadcast (from, message) {
   if (server.clients.length === 0) {
     process.stdout.write('everyone left the chat');
     return;
@@ -9,6 +9,6 @@ const broadcast = function (from, message) {
     if (client.name === from) return;
     client.write(message);
   });
-};
+}
 
 exports.broadcast = broadcast;

@@ -1,20 +1,13 @@
-// test clients using telnet command
-// manage users upon connection and close
-// broadcast messages to all other clients
-// modularize!!!
-// test with chai
+// TODO : test with chai, unit tests
 
 const net = require('net');
-const username = require('./username').generate;
+const username = require('./username');
 const broadcaster = require('./broadcaster');
 const remover = require('./remover');
 
-const server = {};
-
-// const client = {};
 const clients = [];
 
-server.start = net.createServer(client => {
+const start = net.createServer(client => {
   client.name = username.generate();
   const name = client.name;
 
@@ -42,13 +35,14 @@ server.start = net.createServer(client => {
   });
 });
 
-server.start.on('error', error => {
+start.on('error', error => {
   console.log(`ERROR: ${error.message}`);
 });
 
-server.start.listen(65000, () => {
-  let address = server.start.address();
-  console.log(`opened server on ${address}`);
+start.listen(65000, () => {
+  let address = start.address();
+  console.log('opened server on ' + address.port);
 });
 
-exports.start = server.start;
+exports.start = start;
+exports.clients = clients;

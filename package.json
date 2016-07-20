@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "test"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/katesowles/tcp-chat-server-1/issues"
   },
-  "homepage": "https://github.com/katesowles/tcp-chat-server-1#readme"
+  "homepage": "https://github.com/katesowles/tcp-chat-server-1#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
 }
