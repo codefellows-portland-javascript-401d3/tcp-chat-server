@@ -1,7 +1,18 @@
-const server = require('./server');
+function remove (user, collection) {
 
-const remove = function (client) {
-  server.clients.splice(server.clients.indexOf(client.name), 1);
-};
+  let index = -1;
+  for (let i = 0; i < collection.length; i++) {
+    if (collection[i].name == user) {
+      index = i;
+    }
+  }
+
+  if (index == -1) {
+    console.log('\nERROR: could not find that user name', '... index: ', index, '\n');
+  }
+  else {
+    collection.splice(index,1);
+  }
+}
 
 exports.remove = remove;
