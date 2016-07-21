@@ -18,24 +18,12 @@ describe('gotta test \'em all', () => {
     assert.equal(server.clients.length, 0, 'server must be running for this test to work properly');
   });
 
-  it ('gives each user a name', () => {
-    for (let i = 0; i < server.clients.length; i++) {
-      assert.ok(server.clients[i].name);
-      // not sure why I can't control this text enough to make it fail...
-    }
-  });
-
   it ('test remove function', () => {
     const collection = fauxClients;
-    const userIndex = fauxClients[5].name;
     const userToFind = 'geoff';
-    console.log('userToFind: ', userToFind);
-    console.log('userIndex : ', userIndex);
     const before = fauxClients.length;
-    console.log('before:\n', fauxClients, before);
     remove(userToFind, collection);
     const after = fauxClients.length;
-    console.log('after:\n', fauxClients, after);
 
     assert.isBelow(after, before, 'remove function didn\'t work properly');
   });
