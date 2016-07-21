@@ -1,0 +1,29 @@
+{
+  "name": "tcp-chat-server",
+  "version": "1.0.0",
+  "description": "A simple TCP Chat Server",
+  "main": "server.js",
+  "dependencies": {
+    "chai": "^3.5.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^2.5.3"
+  },
+  "scripts": {
+    "watch": "mocha -w",
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharlesEmrich/tcp-chat-server.git"
+  },
+  "author": "charlesemrich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CharlesEmrich/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/CharlesEmrich/tcp-chat-server#readme"
+}

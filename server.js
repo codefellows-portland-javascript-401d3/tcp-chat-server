@@ -1,31 +1,9 @@
 const net = require('net');
-
-class Room {
-  constructor() {
-    this.clients = [];
-  }
-
-  add(client) {
-    this.clients.push(client);
-  }
-
-  remove(client) {
-    const index = this.clients.indexOf(client);
-    if (index !== -1) this.clients.splice(index, 1);
-  }
-
-  send( client, message ) {
-    this.clients.forEach( c => {
-			// if ( c === client ) return; //Currently, we don't want this on.
-      c.write( `${client.name} : ${message} \r\n` );
-    });
-    process.stdout.write(message);
-  }
-}
+const Room = require('./room');
 
 const room = new Room;
 
-const server = net.createServer( client => {
+server = net.createServer( client => {
   //Initialize Client (Should this be encapsulated above?)
   client.name = 'user-' + Math.ceil(Math.random() * 100);
   client.message = '';
@@ -39,7 +17,7 @@ const server = net.createServer( client => {
     //add current character to message string
     client.message += data;
     //Check whether they've entered CRLF and if so, publishToAll.
-    if (data === '\r\n') {
+    if (data.indexOf('\r\n') !== -1) {
       room.send(client, client.message);
       //...and reset message string.
       client.message = '';
@@ -54,7 +32,4 @@ const server = net.createServer( client => {
   });
 });
 
-server.listen(8888, () => {
-  let address = server.address();
-  console.log('Server up! Listening on', address, '.');
-});
+module.exports = {room, server};
