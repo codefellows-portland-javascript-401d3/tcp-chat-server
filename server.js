@@ -17,8 +17,7 @@ server = net.createServer( client => {
     //add current character to message string
     client.message += data;
     //Check whether they've entered CRLF and if so, publishToAll.
-    if (data === '\r\n') {
-      console.log(client.message);
+    if (data.indexOf('\r\n') !== -1) {
       room.send(client, client.message);
       //...and reset message string.
       client.message = '';

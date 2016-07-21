@@ -40,11 +40,9 @@ describe('server', () => {
   });
 
   it('clients can send and receive messages', (done) => {
-    secondClient.write('Hello, there!');
-    secondClient.write('\r\n');
+    firstClient.write('Hello, there!\r\n');
     secondClient.on('data', (data) => {
-      console.log('once fired!');
-      assert.equal(data.toString(), server.room.clients[1].name + ' : Hello, there!');
+      assert.equal(data.toString(), server.room.clients[0].name + ' : Hello, there!\r\n \r\n');
       done();
     });
   });
