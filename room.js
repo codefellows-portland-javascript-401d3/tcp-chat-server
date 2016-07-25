@@ -17,7 +17,7 @@ class Room {
 			// if ( c === client ) return; //Currently, we don't want this on.
       c.write( `${client.name} : ${message} \r\n` );
     });
-    // process.stdout.write(message);
+    // process.stdout.write(message); //Similarly, getting the server to log chat is as simple as uncommenting this line.
   }
 }
 

@@ -1,25 +1,27 @@
 const net = require('net');
 const Room = require('./room');
+const Client = require('./client')
 
 const room = new Room;
 
 server = net.createServer( client => {
-  //Initialize Client (Should this be encapsulated above?)
+
+  // let client = new Client; //Preliminary code to allow sockets to be a class managed by an external file.
+
+  //This block sets initial preferences for each user.
   client.name = 'user-' + Math.ceil(Math.random() * 100);
   client.message = '';
   client.setEncoding('utf-8');
   room.add(client);
 
-  //Welcome.
   client.write('Welcome to CharlesChat, ' + client.name + '\n');
 
   client.on('data', data => {
-    //add current character to message string
     client.message += data;
-    //Check whether they've entered CRLF and if so, publishToAll.
+    //Here, I'm accounting for Windows' peculiar handling of the 'data' event.
     if (data.indexOf('\r\n') !== -1) {
       room.send(client, client.message);
-      //...and reset message string.
+    //Since I've had to use this unusual method to aggregate the message string, I have to manually reset it.
       client.message = '';
     }
   });
