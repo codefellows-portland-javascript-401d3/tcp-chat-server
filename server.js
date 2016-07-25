@@ -1,5 +1,3 @@
-// TODO : test with chai, unit tests
-
 const net = require('net');
 const username = require('./username');
 const broadcaster = require('./broadcaster');
