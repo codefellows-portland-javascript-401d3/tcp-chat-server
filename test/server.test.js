@@ -1,4 +1,6 @@
+const net = require('net');
 const server = require('../server');
+const clients = require('../server').clients;
 const remove = require('../remover').remove;
 const assert = require('chai').assert;
 
@@ -26,5 +28,52 @@ describe('gotta test \'em all', () => {
     const after = fauxClients.length;
 
     assert.isBelow(after, before, 'remove function didn\'t work properly');
+  });
+
+  it('data is received', done => {
+    var client = net.connect({port: 65000}, () => {
+      client.write('hello?\n');
+      client.write('is this thing on?\n');
+    });
+
+    client.on('data', data => {
+      assert.ok(data);
+      client.end();
+      done();
+    });
+  });
+
+  it('test live connect & disconnect from new client', done => {
+    var client = net.connect({port: 65000});
+
+    client.on('data', data => {
+      assert.include(data.toString(), 'welcome ');
+      client.end();
+      done();
+    });
+  });
+
+  it('data received even when multiple clients connected?', done => {
+    const client1 = net.connect({port:65000});
+    client1.on('data', data => {
+      console.log(`client1 is connected, ${data}`);
+      assert.include(data.toString(), 'welcome ');
+      client1.end();
+    });
+
+    const client2 = net.connect({port:65000});
+    client2.on('data', data => {
+      console.log(`client2 is connected, ${data}`);
+      assert.include(data.toString(), 'welcome ');
+      client2.end();
+    });
+
+    const client3 = net.connect({port:65000});
+    client3.on('data', data => {
+      console.log(`client3 is connected, ${data}`);
+      assert.include(data.toString(), 'welcome ');
+      client3.end();
+    });
+    done();
   });
 });
