@@ -1,0 +1,30 @@
+{
+  "name": "tcp-chat-server",
+  "version": "1.0.0",
+  "description": "A simple TCP Chat Server, connect via telnet to start chatting",
+  "main": "./lib/chatServer.js",
+  "scripts": {
+    "pretest": "npm run lint",
+    "test": "mocha",
+    "watch": "mocha -w",
+    "lint": "eslint **/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronbini/tcp-chat-server.git"
+  },
+  "author": "Aaron Bini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronbini/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/aaronbini/tcp-chat-server#readme",
+  "dependencies": {
+    "sillyname": "^0.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3",
+    "eslint": "^3.1.1"
+  }
+}
